@@ -1,6 +1,9 @@
 # Rust Build Targets
 /target
 
+# FVM initialized directory
+/.fvm/flutter_sdk
+
 # Miscellaneous
 *.class
 *.log
