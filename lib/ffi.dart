@@ -3,10 +3,10 @@
 
 import 'dart:ffi';
 
-import 'bridge_generated.dart' as gen;
+import 'bridge_generated/api.dart' as gen;
 
 // Re-export the bridge so it is only necessary to import this file.
-export 'bridge_generated.dart';
+export 'bridge_generated/api.dart';
 import 'dart:io' as io;
 
 const _base = 'rust';

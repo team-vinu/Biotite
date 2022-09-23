@@ -4,6 +4,9 @@
 # FVM initialized directory
 /.fvm/flutter_sdk
 
+# Ignore Rust Flutter bridge generated
+/lib/bridge_generated
+
 # Miscellaneous
 *.class
 *.log
