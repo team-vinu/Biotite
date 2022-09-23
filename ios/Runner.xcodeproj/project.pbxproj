@@ -10,8 +10,7 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
-		84DCBB1C28DE09C2000A3719 /* librust_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C54F8528DE055200CD7004 /* librust_static.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		84DCBB1D28DE09CF000A3719 /* rust.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C54F8328DE055200CD7004 /* rust.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84DCBB1C28DE09C2000A3719 /* librust_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C54F8528DE055200CD7004 /* librust_static.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
@@ -38,13 +37,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = CA605112CB4DD7FE05CF3236;
 			remoteInfo = "rust-staticlib";
-		};
-		84DCBB1928DE09A1000A3719 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84C54F7D28DE055200CD7004 /* rust.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CA60027ED63BA9B7DBF86DC0;
-			remoteInfo = "rust-cdylib";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -83,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84DCBB1D28DE09CF000A3719 /* rust.dylib in Frameworks */,
 				84DCBB1C28DE09C2000A3719 /* librust_static.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,7 +160,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				84DCBB1A28DE09A1000A3719 /* PBXTargetDependency */,
 				84DCBB1628DE0980000A3719 /* PBXTargetDependency */,
 			);
 			name = Runner;
@@ -296,11 +286,6 @@
 			name = "rust-staticlib";
 			targetProxy = 84DCBB1528DE0980000A3719 /* PBXContainerItemProxy */;
 		};
-		84DCBB1A28DE09A1000A3719 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "rust-cdylib";
-			targetProxy = 84DCBB1928DE09A1000A3719 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -367,7 +352,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -388,6 +375,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.biotite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -445,6 +433,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -493,8 +483,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -516,6 +508,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.biotite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -538,6 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.biotite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
