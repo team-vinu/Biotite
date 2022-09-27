@@ -38,6 +38,7 @@ dependencies:
   flutter_rust_bridge: ^1.47.1
   freezed_annotation: ^2.1.0
   meta: ^1.7.0
+  fpdart: ^0.2.0
 
 dev_dependencies:
   flutter_test:

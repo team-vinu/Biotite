@@ -9,7 +9,9 @@ edition = "2021"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [dependencies]
-
 flutter_rust_bridge = "1"
 
-mlua = { version = "0.8", features = ["luajit52", "vendored"] }
+gluon = "0.18.0"
+
+comrak = "0.14"
+syntect = "5.0.0"
