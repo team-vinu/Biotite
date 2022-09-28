@@ -1,32 +1,31 @@
 use comrak::{markdown_to_html, ComrakOptions};
-use gluon::{
-    new_vm, primitive,
-    vm::{
-        self,
-        api::{Hole, OpaqueValue},
-    },
-    Thread, ThreadExt,
-};
+use once_cell::sync::Lazy;
+use rhai::{Engine, Scope};
+use std::sync::Mutex;
 
-fn print(s: String) -> String {
-    s
+static SCOPE: Lazy<Mutex<Scope>> = Lazy::new(|| Mutex::new(Scope::new()));
+static ENGINE: Lazy<Engine> = Lazy::new(|| Engine::new());
+
+pub fn get_hello() -> String {
+    let scope = match SCOPE.lock() {
+        Ok(s) => s,
+        Err(_) => return "Is poisoned!".to_string(),
+    };
+    match scope.get_value("hello") {
+        Some(val) => val,
+        None => return "There is no hello.".to_string(),
+    }
 }
 
-fn load_print(vm: &Thread) -> vm::Result<vm::ExternModule> {
-    vm::ExternModule::new(vm, primitive!(1, print))
-}
-
-pub fn execute_gluon(s: String) -> String {
-    let vm = new_vm();
-
-    let mut database = vm.get_database_mut();
-    database.set_full_metadata(true);
-    database.run_io(true);
-
-    let (io, thread) = vm
-        .run_expr::<OpaqueValue<&Thread, Hole>>("Dart", &s)
-        .unwrap();
-    format!("script: {:?}", io)
+pub fn execute_rhai(s: String) -> Option<String> {
+    let mut scope = match SCOPE.lock() {
+        Ok(s) => s,
+        Err(_) => return None,
+    };
+    match ENGINE.run_with_scope(&mut scope, &s) {
+        Ok(_) => Some("Run with no errors".to_string()),
+        Err(e) => Some(format!("Run with errors: {e}")),
+    }
 }
 
 pub fn parse_markdown(md: String) -> String {
