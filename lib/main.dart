@@ -50,19 +50,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String code = "";
-  String ret = "";
+  String errors = "";
+  String script = "";
   String html = "";
+  String hello = "";
 
-  void execGluon(String code) {
+  void evalRhai(String code) {
     setState(() {
-      api.executeGluon(s: code).then((val) => ret = val);
+      script = code;
     });
+    api.executeRhai(s: script).then((value) => errors = value!);
   }
 
   void renderHtml(String md) {
     setState(() {
       api.parseMarkdown(md: md).then((value) => html = value);
+    });
+  }
+
+  void getHello() {
+    setState(() {
+      api.getHello().then((value) => hello = value);
     });
   }
 
@@ -88,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Html(
               data: html,
-            )
+            ),
           ],
         ),
       ),
@@ -98,19 +106,28 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (BuildContext context, int index) {
           return ListBody(
             children: <Widget>[
-              Text("Gluon Scripting Settings"),
+              Text("Rhai Scripting Settings"),
               TextFormField(
-                onChanged: (script) => code = script,
+                initialValue: script,
+                onChanged: (script) => evalRhai(script),
                 keyboardType: TextInputType.multiline,
                 showCursor: true,
-                maxLines: 50,
+                maxLines: 10,
               ),
+              Text(
+                hello,
+                style: TextStyle(color: Color.fromARGB(255, 0, 0, 255)),
+              ),
+              Text(
+                errors,
+                style: TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
+              )
             ],
           );
         },
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => execGluon(code),
+        onPressed: () => getHello(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
